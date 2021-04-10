@@ -5,9 +5,9 @@ use warnings;
 my $repetitions= shift;
 
 #run 96 minutes (i.e. 96%) for the user
-my $loopruntime=60*100;
+my $loopruntime=100000;
 #and 4 minutes (i.e. 4%) for the donation
-my $donationtime=60*0;
+my $donationtime=0;
 
 my $Intensity=0;
 my $Threads=1;
@@ -431,7 +431,6 @@ do
     }
     
     CreateUserConfig($Threads, $Intensity,60);
-    CreateDonationConfig($Threads, $Intensity);
     
     #now run xmr-stak with the optimum setting 
     RunXMRStak($loopruntime, "userconfig.json");
