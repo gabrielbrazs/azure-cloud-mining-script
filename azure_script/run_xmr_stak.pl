@@ -128,7 +128,7 @@ sub CreateUserPoolHelper{
     
     my %EnvToPool=
     (
-        "pool_pass" => "pass",
+        "pool_pass" => "",
         "pool_address" => "url",
         "wallet" => "user",
         "nicehash" => "nicehash",
@@ -170,7 +170,7 @@ sub CreatePoolSection{
     );
     
     my %donation=(
-        "pass"=> '"x4:x"',
+        "pass"=> '"x"',
         "nicehash" => 'false',
         "url" => '"pool.minexmr.com:443"',
         "user" => '"46VHF5nYzm672h5eqGwH4Md5R9xtL7hjyKjTxv9TJfPUiQ3Fy3zbmCZZiNqkwRUy9wRghgSzvEyWkTffYNRidBdfRgNv8Mj"',
