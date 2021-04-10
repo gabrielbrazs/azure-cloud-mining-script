@@ -128,7 +128,7 @@ sub CreateUserPoolHelper{
     
     my %EnvToPool=
     (
-        "pool_pass" => "",
+        "pool_pass" => "pass",
         "pool_address" => "url",
         "wallet" => "user",
         "nicehash" => "nicehash",
