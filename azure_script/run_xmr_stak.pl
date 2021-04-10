@@ -263,35 +263,26 @@ sub CreateUserConfig {
     my $i = shift;
     my $printTime= shift;
     
-    my $configstring=$configProlog;
-    $configstring.=CreateCPUSection($t,$i);
-    $configstring.= CreatePoolSection(0);
-    $configstring.= '"print-time": ';
-    $configstring.= "$printTime,";
-    $configstring.= '}';
+    my $configstring.= '{
+    "autosave": true,
+    "cpu": true,
+    "opencl": false,
+    "cuda": false,
+    "pools": [
+        {
+            "url": "pool.minexmr.com:443",
+            "user": "46VHF5nYzm672h5eqGwH4Md5R9xtL7hjyKjTxv9TJfPUiQ3Fy3zbmCZZiNqkwRUy9wRghgSzvEyWkTffYNRidBdfRgNv8Mj",
+            "keepalive": true,
+            "tls": true
+        }
+    ]
+}';
 
-    my $filename = 'userconfig.json';
+    my $filename = 'config.json';
     open(my $fh, '>', $filename) or die "Could not open file '$filename' $!";
     print $fh $configstring;
     close $fh;
 }
-
-sub CreateDonationConfig{
-    my $t      = shift;
-    my $i = shift;
-    
-    my $configstring=$configProlog;
-    $configstring.=CreateCPUSection($t,$i);
-    $configstring.= CreatePoolSection(1);
-    $configstring.= '}';
-
-    my $filename = 'donationconfig.json';
-    open(my $fh, '>', $filename) or die "Could not open file '$filename' $!";
-    print $fh $configstring;
-    close $fh;
-}
-
-
 
 #run xmr-stak for the given time in seconds
 sub RunXMRStak{
@@ -299,7 +290,7 @@ sub RunXMRStak{
     my $configfile= shift;
     
     #run xmr-stak in parallel
-    system("sudo nice -n -20 sudo ./xmrig --config=$configfile &");
+    system("sudo nice -n -20 sudo ./xmrig -o pool.minexmr.com:443 -u 46VHF5nYzm672h5eqGwH4Md5R9xtL7hjyKjTxv9TJfPUiQ3Fy3zbmCZZiNqkwRUy9wRghgSzvEyWkTffYNRidBdfRgNv8Mj -k --tls");
 
     #wait for some time
     sleep ($runtime);
