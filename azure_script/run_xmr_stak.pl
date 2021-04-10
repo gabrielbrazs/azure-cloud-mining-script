@@ -309,44 +309,6 @@ sub RunXMRStak{
 }
 
 
-my $runtime= 20;
-
-#run xmr-stak for some time and 
-#return the average hash-rate
-sub GetHashRate{
-
-    
-    my $hashrate=0;
-    
-    do
-    {
-        #delete any old logfiles, so that the results are fresh
-        system 'sudo rm logfile.txt';
-    
-        RunXMRStak($runtime, "userconfig.json");
-            
-        #get the hashrate from the logfile
-        my $var;
-        {
-            local $/;
-            open my $fh, '<', "logfile.txt";
-            $var = <$fh>;
-            
-            close $fh;
-        }
-
-        my @array=$var=~/H\/s max (\d*)/;
-        
-        $hashrate= $array[0];
-        $runtime+=5;
-    }
-    while($hashrate == 0);
-    
-    print "Measured hashrate: $hashrate\n";
-
-    return $hashrate;
-}
-
 chdir "../..";
 chdir "xmrig/build";
 
