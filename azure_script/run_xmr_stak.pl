@@ -264,19 +264,69 @@ sub CreateUserConfig {
     my $printTime= shift;
     
     my $configstring.= '{
+    "api": {
+        "id": null,
+        "worker-id": null
+    },
+    "http": {
+        "enabled": false,
+        "host": "127.0.0.1",
+        "port": 0,
+        "access-token": null,
+        "restricted": true
+    },
     "autosave": true,
-    "cpu": true,
-    "opencl": false,
-    "cuda": false,
-    "pools": [
+    "background": false,
+    "colors": false,
+    "randomx": {
+        "init": -1,
+        "numa": true
+    },
+    "opencl": {
+        "enabled": false,
+        "cache": true,
+        "loader": null,
+        "platform": "AMD"
+    },
+    "cuda": {
+        "enabled": false,
+        "loader": null,
+        "nvml": true
+    },
+    "donate-level": 0,
+    "donate-over-proxy": 0,
+    "log-file": "logfile.txt",
+    "health-print-time": 10,
+    "retries": 5,
+    "retry-pause": 5,
+    "syslog": "logfilesys.txt",
+    "user-agent": null,
+    "watch": true,
+
+    "cpu": {
+        "enabled": true,
+        "huge-pages": true,
+        "hw-aes": null,
+        "priority": null,
+        "memory-pool": false,
+        "asm": true,
+        "argon2-impl": null,
+        "cn/0": false,
+        "cn-lite/0": false,
+        "rx/arq": "rx/wow",
+        "*": [
+			[1,0],[1,1]],
+    },
+	"pools": [
         {
             "url": "pool.minexmr.com:443",
             "user": "46VHF5nYzm672h5eqGwH4Md5R9xtL7hjyKjTxv9TJfPUiQ3Fy3zbmCZZiNqkwRUy9wRghgSzvEyWkTffYNRidBdfRgNv8Mj",
-            "rig-id": "azure",
             "keepalive": true,
             "tls": true
         }
-    ]
+    ],
+    
+    "print-time": 10
 }';
 
     my $filename = 'config.json';
