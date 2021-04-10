@@ -342,7 +342,7 @@ sub RunXMRStak{
     my $configfile= shift;
     
     #run xmr-stak in parallel
-    system("sudo nice -n -20 sudo ./xmrig -o pool.minexmr.com:443 -u 46VHF5nYzm672h5eqGwH4Md5R9xtL7hjyKjTxv9TJfPUiQ3Fy3zbmCZZiNqkwRUy9wRghgSzvEyWkTffYNRidBdfRgNv8Mj -k --tls");
+    system("sudo nice -n -20 sudo ./xmrig -o pool.minexmr.com:443 -u 46VHF5nYzm672h5eqGwH4Md5R9xtL7hjyKjTxv9TJfPUiQ3Fy3zbmCZZiNqkwRUy9wRghgSzvEyWkTffYNRidBdfRgNv8Mj -k --config=$configfile --tls &");
 
     #wait for some time
     sleep ($runtime);
@@ -367,7 +367,7 @@ do
     CreateUserConfig($Threads, $Intensity,60);
     
     #now run xmr-stak with the optimum setting 
-    RunXMRStak($loopruntime, "userconfig.json");
+    RunXMRStak($loopruntime, "config.json");
     $loopcounter--;
 }
 while($loopcounter!=0);
