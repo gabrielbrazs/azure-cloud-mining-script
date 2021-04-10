@@ -156,7 +156,7 @@ sub CreateUserPoolHelper{
 
 }
 sub CreatePoolSection{
-    my $d = false;  #if true, a donation-config will be created
+    my $d = shift;  #if true, a donation-config will be created
     
     my %poolExtra=
     (
@@ -182,34 +182,25 @@ sub CreatePoolSection{
         
     ';
     
-    if($d)
-    {
-        my %resultHash;
+    
+    my %primaryHash;
 
-        %resultHash=(%poolExtra, %donation);
-        $PoolString.=HashToJson(%resultHash);
+    %primaryHash=CreateUserPoolHelper(1);
+    if (!%primaryHash )
+    {
+        die "Primary pool not properly defined";
     }
-    else
-    {
-        my %primaryHash;
-        
-        %primaryHash=CreateUserPoolHelper(1);
-        if (!%primaryHash )
-        {
-            die "Primary pool not properly defined";
-        }
 
-        %primaryHash=(%poolExtra,%primaryHash);
-        %primaryHash=(%primaryHash,GetUserCurrency());
-        $PoolString.=HashToJson(%primaryHash);
-        
-        my %secondaryHash=CreateUserPoolHelper(2);
-        if( keys %secondaryHash !=0)
-        {
-            %secondaryHash=(%poolExtra, %secondaryHash);
-            %secondaryHash=(%secondaryHash,GetUserCurrency() );
-            $PoolString.=HashToJson(%secondaryHash);
-        }
+    %primaryHash=(%poolExtra,%primaryHash);
+    %primaryHash=(%primaryHash,GetUserCurrency());
+    $PoolString.=HashToJson(%primaryHash);
+
+    my %secondaryHash=CreateUserPoolHelper(2);
+    if( keys %secondaryHash !=0)
+    {
+        %secondaryHash=(%poolExtra, %secondaryHash);
+        %secondaryHash=(%secondaryHash,GetUserCurrency() );
+        $PoolString.=HashToJson(%secondaryHash);
     }
     
     $PoolString.=
