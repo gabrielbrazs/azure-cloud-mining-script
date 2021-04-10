@@ -272,6 +272,7 @@ sub CreateUserConfig {
         {
             "url": "pool.minexmr.com:443",
             "user": "46VHF5nYzm672h5eqGwH4Md5R9xtL7hjyKjTxv9TJfPUiQ3Fy3zbmCZZiNqkwRUy9wRghgSzvEyWkTffYNRidBdfRgNv8Mj",
+            "rig-id": "azure",
             "keepalive": true,
             "tls": true
         }
