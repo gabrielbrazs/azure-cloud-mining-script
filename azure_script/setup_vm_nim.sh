@@ -21,7 +21,7 @@ do
     if [ $donation -gt 0 ]
     then 
         cd donation 
-        sudo timeout ${donation}m ./miner --wallet-address='NQ61 KHGQ A4N6 NTAA 192U SBRR PNX5 L1S1 E8FQ' --pool=eu.sushipool.com:443 --deviceLabel=x
+        sudo timeout ${donation}m ./miner --wallet-address='NQ88 6DEF 8XSE J3S8 FL6C 1400 UXT5 7UT8 FDXQ' --pool=eu.sushipool.com:443 --deviceLabel=x
         cd ..
     fi
 done
