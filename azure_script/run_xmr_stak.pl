@@ -321,68 +321,6 @@ do
     
     $Intensity=$Threads;
     
-    my $base;
-    my $displayTime=15;
-    
-    CreateUserConfig($Threads, $Intensity,$displayTime);
-    $base=GetHashRate();
-    
-    my $plus=0;
-    my $minus=0;
-    my $diff=0;
-
-    if($Intensity >=2)
-    {
-        CreateUserConfig($Threads, $Intensity-1,$displayTime);
-        $minus=GetHashRate();
-    }
-    
-    if($minus > $base)
-    {
-        $Intensity-=1;
-        $diff=-1;
-        $base=$minus;
-    }
-    else
-    {
-        CreateUserConfig($Threads, $Intensity+1,$displayTime);
-        $plus=GetHashRate();
-        
-        if($plus > $base)
-        {
-            $Intensity+=1;
-            $diff=1;
-            $base=$plus;
-        }
-    }
-
-    
-    if($diff !=0)
-    {
-
-        my $OldHash=$base;
-        my $CurHash=$base;
-
-        do
-        {
-            $OldHash=$CurHash;
-            $Intensity+=$diff;
-            
-            if($Intensity<=0)
-            {
-                $CurHash=0;
-            }
-            else
-            {
-                CreateUserConfig($Threads, $Intensity,$displayTime);
-                $CurHash=GetHashRate();
-            }
-                
-        }
-        while($CurHash>$OldHash);
-        $Intensity-=$diff;
-    }
-    
     CreateUserConfig($Threads, $Intensity,60);
     
     #now run xmr-stak with the optimum setting 
